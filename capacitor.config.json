@@ -1,0 +1,6 @@
+{
+  "appId": "com.darkroom.aieditor",
+  "appName": "Darkroom AI Editor",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
