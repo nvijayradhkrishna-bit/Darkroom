@@ -1,0 +1,22 @@
+{
+  "name": "darkroom-ai-editor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline Android image editor with free on-device AI tools",
+  "scripts": {
+    "start": "vite --host 0.0.0.0",
+    "prebuild": "node copy-models.mjs",
+    "build": "vite build",
+    "android:sync": "npm run build && npx cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "7.4.3",
+    "@capacitor/core": "7.4.3",
+    "@imgly/background-removal": "^1.5.5",
+    "@imgly/background-removal-data": "^1.5.5"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "7.4.3",
+    "vite": "^6.4.1"
+  }
+}

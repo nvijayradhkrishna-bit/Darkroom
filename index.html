@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101116">
+  <title>Darkroom AI Editor</title>
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand"><div class="brandmark">D</div><div><b>darkroom</b><small>AI PHOTO STUDIO</small></div></div>
+      <button id="exportBtn" class="primary small" disabled>Export <span>↗</span></button>
+    </header>
+    <main>
+      <section class="workspace">
+        <div class="sectionhead"><div><span class="eyebrow">YOUR CREATIVE SPACE</span><h1>Image editor</h1></div><span id="saveState" class="status">● Ready</span></div>
+        <div class="canvas-wrap" id="dropZone">
+          <canvas id="canvas" width="1200" height="800"></canvas>
+          <div class="busy hidden" id="busy"><div class="spinner"></div><span id="busyText"></span><div class="bar"><i id="busyBar"></i></div></div>
+          <div class="empty" id="emptyState">
+            <div class="upload-icon">＋</div><h2>Start with a photo</h2>
+            <p>Choose an image or drop it here to begin editing.</p>
+            <label class="primary upload-btn">Choose image<input id="fileInput" type="file" accept="image/*" hidden></label>
+            <small>JPG · PNG · WEBP</small>
+          </div>
+        </div>
+        <div class="toolbar">
+          <button id="undoBtn" disabled>↶ <span>Undo</span></button>
+          <button id="rotateBtn" disabled>⟳ <span>Rotate</span></button>
+          <button id="flipBtn" disabled>⇋ <span>Flip</span></button>
+          <button id="resetBtn" disabled>⟲ <span>Reset</span></button>
+          <label class="tool-upload">＋ <span>Replace</span><input id="replaceInput" type="file" accept="image/*" hidden></label>
+        </div>
+      </section>
+      <section class="editor-panel">
+        <nav class="tabs">
+          <button class="tab active" data-tab="adjust">Adjust</button>
+          <button class="tab" data-tab="filters">Filters</button>
+          <button class="tab" data-tab="ai">AI tools <i>NEW</i></button>
+        </nav>
+        <div class="panel-content" id="adjustPanel">
+          <div class="panel-title"><div><h2>Basic adjustments</h2><p>Fine-tune your image</p></div><button id="resetAdjust" class="textbtn">Reset</button></div>
+          <div class="slider-row"><div><label for="brightness">Brightness</label><output id="brightnessVal">100%</output></div><input id="brightness" type="range" min="0" max="200" value="100"></div>
+          <div class="slider-row"><div><label for="contrast">Contrast</label><output id="contrastVal">100%</output></div><input id="contrast" type="range" min="0" max="200" value="100"></div>
+          <div class="slider-row"><div><label for="saturation">Saturation</label><output id="saturationVal">100%</output></div><input id="saturation" type="range" min="0" max="200" value="100"></div>
+          <div class="slider-row"><div><label for="blur">Soft focus</label><output id="blurVal">0px</output></div><input id="blur" type="range" min="0" max="10" value="0" step=".5"></div>
+          <div class="hint">Adjustments are rendered on this device. Nothing is ever uploaded.</div>
+        </div>
+        <div class="panel-content hidden" id="filtersPanel">
+          <div class="panel-title"><div><h2>Looks & filters</h2><p>One tap creative styles</p></div></div>
+          <div class="filter-grid">
+            <button class="filter" data-filter="none"><span class="filter-preview natural"></span>Original</button>
+            <button class="filter" data-filter="mono"><span class="filter-preview mono"></span>Mono</button>
+            <button class="filter" data-filter="warm"><span class="filter-preview warm"></span>Warm</button>
+            <button class="filter" data-filter="vivid"><span class="filter-preview vivid"></span>Vivid</button>
+            <button class="filter" data-filter="fade"><span class="filter-preview fade"></span>Fade</button>
+            <button class="filter" data-filter="noir"><span class="filter-preview noir"></span>Noir</button>
+          </div>
+        </div>
+        <div class="panel-content hidden" id="aiPanel">
+          <div class="panel-title"><div><h2>Advanced AI studio</h2><p>All tools run free on your phone, offline</p></div></div>
+          <div id="aiView" class="ai-view hidden"></div>
+          <div class="ai-list" id="aiList">
+            <article class="ai-card"><div class="ai-icon">✂</div><div><b>Background remover</b><p>Separate the subject and make the background transparent.</p><small class="model-state">ON-DEVICE</small></div><button data-ai="background">Open</button></article>
+            <article class="ai-card"><div class="ai-icon">✦</div><div><b>AI enhance</b><p>Sharpen and bring out detail.</p><small class="model-state">ON-DEVICE</small></div><button data-ai="enhance">Open</button></article>
+            <article class="ai-card"><div class="ai-icon">⌫</div><div><b>Object remover</b><p>Mask an unwanted object and inpaint the selected area.</p><small class="model-state">ON-DEVICE</small></div><button data-ai="object">Open</button></article>
+            <article class="ai-card"><div class="ai-icon">⇄</div><div><b>Swap subject</b><p>Move a person or object from another photo into this one.</p><small class="model-state">ON-DEVICE</small></div><button data-ai="swap">Open</button></article>
+            <article class="ai-card"><div class="ai-icon">▧</div><div><b>Replace background</b><p>Place your cut-out subject in a new scene.</p><small class="model-state">ON-DEVICE</small></div><button data-ai="replace">Open</button></article>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div class="toast" id="toast" role="status"></div>
+    <footer> DARKROOM AI EDITOR <span>•</span> PRIVATE BY DESIGN</footer>
+  </div>
+  <script type="module" src="/src.js"></script>
+</body>
+</html>
